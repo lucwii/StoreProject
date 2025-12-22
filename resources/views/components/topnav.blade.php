@@ -43,13 +43,14 @@
     $currentRoute = request()->route()->getName() ?? '';
     $isProdaja = str_contains($currentRoute, 'prodaja') || request()->is('prodaja*');
     $isDashboard = $currentRoute === 'dashboard' || request()->is('dashboard');
+    $isZalihe = str_contains($currentRoute, 'artikal') || request()->is('artikals*');
 @endphp
 
 <div class="container" style="margin-top: 10px;">
     <div class="topnav-bar">
         <a href="{{ route('dashboard') }}" class="topnav-pill {{ $isDashboard ? 'active' : '' }}">Home</a>
         <a href="{{ route('prodajas.create') }}" class="topnav-pill {{ $isProdaja ? 'active' : '' }}">Prodaja</a>
-        <a href="#" class="topnav-pill">Zalihe</a>
+        <a href="{{ route('artikals.index') }}" class="topnav-pill {{ $isZalihe ? 'active' : '' }}">Zalihe</a>
         <a href="#" class="topnav-pill">Nabavka</a>
         <a href="#" class="topnav-pill">Kupci</a>
         <a href="#" class="topnav-pill">Dobavljači</a>

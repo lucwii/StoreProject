@@ -13,10 +13,22 @@ class ArtikalController extends Controller
 {
     public function index(Request $request): View
     {
-        $artikals = Artikal::all();
+        $query = Artikal::query();
+
+        // Pretraga po nazivu ili opisu
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('naziv', 'like', '%' . $search . '%')
+                  ->orWhere('opis', 'like', '%' . $search . '%');
+            });
+        }
+
+        $artikals = $query->orderBy('naziv')->get();
 
         return view('artikal.index', [
             'artikals' => $artikals,
+            'search' => $request->search ?? '',
         ]);
     }
 
