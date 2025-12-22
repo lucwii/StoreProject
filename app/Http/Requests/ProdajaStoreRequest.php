@@ -20,12 +20,11 @@ class ProdajaStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'datum' => ['required', 'date'],
+            'datum' => ['sometimes', 'date'],
             'ukupan_iznos' => ['required', 'numeric', 'between:-99999999.99,99999999.99'],
             'nacin_placanja' => ['required', 'string'],
             'kupac_id' => ['required', 'integer', 'exists:kupacs,id'],
-            'user_id' => ['required', 'integer', 'exists:users,id'],
-            'kupac_user_id' => ['required', 'integer', 'exists:kupac_users,id'],
+            // user_id and kupac_user_id will be set server-side where applicable
         ];
     }
 }

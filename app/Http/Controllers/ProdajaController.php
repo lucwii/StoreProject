@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProdajaStoreRequest;
 use App\Http\Requests\ProdajaUpdateRequest;
 use App\Models\Prodaja;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -25,14 +26,40 @@ class ProdajaController extends Controller
         return view('prodaja.create');
     }
 
-    public function store(ProdajaStoreRequest $request): RedirectResponse
-    {
-        $prodaja = Prodaja::create($request->validated());
+public function store(Request $request)
+{
+    $request->validate([
+        'kupac_id' => 'required',
+        'nacin_placanja' => 'required|string',
+        'ukupan_iznos' => 'required|numeric',
+        'artikli' => 'required|array|min:1',
+        'artikli.*.artikal_id' => 'required',
+        'artikli.*.kolicina' => 'required|numeric|min:1',
+        'artikli.*.cena' => 'required|numeric|min:0',
+    ]);
 
-        $request->session()->flash('prodaja.id', $prodaja->id);
+    // kreiramo prodaju sa današnjim datumom
+    $prodaja = Prodaja::create([
+        'datum' => now(), // današnji datum
+        'ukupan_iznos' => $request->ukupan_iznos,
+        'nacin_placanja' => $request->nacin_placanja,
+        'kupac_id' => $request->kupac_id,
+        'user_id' => $request->user_id,
+    ]);
 
-        return redirect()->route('prodajas.index');
+    // dodajemo stavke prodaje
+    foreach ($request->artikli as $artikal) {
+        $prodaja->stavkaProdajes()->create([
+            'artikal_id' => $artikal['artikal_id'],
+            'kolicina' => $artikal['kolicina'],
+            'cena' => $artikal['cena'],
+        ]);
     }
+
+    return redirect()->route('dashboard')->with('success', 'Prodaja je sačuvana.');
+}
+
+
 
     public function show(Request $request, Prodaja $prodaja): View
     {
