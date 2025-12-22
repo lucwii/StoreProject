@@ -18,3 +18,14 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::resource('kupacs', App\Http\Controllers\KupacController::class);
+
+Route::resource('dobavljacs', App\Http\Controllers\DobavljacController::class);
+
+Route::resource('artikals', App\Http\Controllers\ArtikalController::class);
+
+Route::resource('prodajas', App\Http\Controllers\ProdajaController::class);
+
+Route::resource('narudzbinas', App\Http\Controllers\NarudzbinaController::class);

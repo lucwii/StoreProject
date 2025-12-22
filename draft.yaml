@@ -1,5 +1,101 @@
 models:
-  # ...
+  Uloga:
+    naziv: string
+    relationships:
+      hasMany: Korisnik
+
+  Kupac:
+    ime: string
+    prezime: string
+    telefon: string
+    email: string:nullable
+    adresa: string:nullable
+    relationships:
+      hasMany: Prodaja
+
+  Dobavljac:
+    naziv: string
+    kontakt_osoba: string
+    telefon: string
+    email: string
+    relationships:
+      hasMany:
+        - Artikal
+        - Narudzbina
+
+  Artikal:
+    naziv: string
+    opis: text
+    nabavna_cena: decimal:8,2
+    prodajna_cena: decimal:8,2
+    kolicina_na_stanju: integer
+    dobavljac_id: id
+    relationships:
+      belongsTo: Dobavljac
+      hasMany:
+        - StavkaProdaje
+        - StavkaNarudzbine
+
+  Prodaja:
+    datum: date
+    ukupan_iznos: decimal:10,2
+    nacin_placanja: string
+    kupac_id: id
+    user_id: id
+    relationships:
+      belongsTo:
+        - Kupac
+        - User
+      hasMany: StavkaProdaje
+
+  StavkaProdaje:
+    prodaja_id: id
+    artikal_id: id
+    kolicina: integer
+    cena: decimal:8,2
+    relationships:
+      belongsTo:
+        - Prodaja
+        - Artikal
+
+  Narudzbina:
+    datum: date
+    status: string
+    dobavljac_id: id
+    user_id: id
+    relationships:
+      belongsTo:
+        - Dobavljac
+        - User
+      hasMany: StavkaNarudzbine
+
+  StavkaNarudzbine:
+    narudzbina_id: id
+    artikal_id: id
+    kolicina: integer
+    relationships:
+      belongsTo:
+        - Narudzbina
+        - Artikal
 
 controllers:
-  # ...
+  Kupac:
+    resource: web
+
+  Dobavljac:
+    resource: web
+
+  Artikal:
+    resource: web
+
+  Prodaja:
+    resource: web
+
+  Narudzbina:
+    resource: web
+
+seeders:
+  Uloga
+  Kupac
+  Dobavljac
+  Artikal
