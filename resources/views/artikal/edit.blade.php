@@ -131,7 +131,6 @@
                                 name="opis" 
                                 class="form-textarea @error('opis') is-invalid @enderror" 
                                 placeholder="Opis"
-                                required
                             >{{ old('opis', $artikal->opis) }}</textarea>
                             @error('opis')
                                 <div class="error-message">{{ $message }}</div>

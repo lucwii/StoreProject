@@ -20,12 +20,24 @@ class ArtikalUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'naziv' => ['required', 'string'],
-            'opis' => ['required', 'string'],
-            'nabavna_cena' => ['required', 'numeric', 'between:-999999.99,999999.99'],
-            'prodajna_cena' => ['required', 'numeric', 'between:-999999.99,999999.99'],
-            'kolicina_na_stanju' => ['required', 'integer'],
-            'dobavljac_id' => ['required', 'integer', 'exists:Dobavljacs,id'],
+            'naziv' => ['required', 'string', 'max:255'],
+            'opis' => ['nullable', 'string'],
+            'nabavna_cena' => ['required', 'numeric', 'min:0', 'max:999999.99'],
+            'prodajna_cena' => ['required', 'numeric', 'min:0', 'max:999999.99'],
+            'kolicina_na_stanju' => ['required', 'integer', 'min:0'],
+            'dobavljac_id' => ['required', 'integer', 'exists:dobavljacs,id'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'nabavna_cena.numeric' => 'Nabavna cena mora biti broj.',
+            'nabavna_cena.min' => 'Nabavna cena mora biti veća ili jednaka 0.',
+            'prodajna_cena.numeric' => 'Prodajna cena mora biti broj.',
+            'prodajna_cena.min' => 'Prodajna cena mora biti veća ili jednaka 0.',
+            'kolicina_na_stanju.integer' => 'Količina mora biti ceo broj.',
+            'kolicina_na_stanju.min' => 'Količina mora biti veća ili jednaka 0.',
         ];
     }
 }

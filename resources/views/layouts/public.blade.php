@@ -10,7 +10,7 @@
     <!-- Custom CSS (opciono) -->
     @stack('styles')
 </head>
-<body class="d-flex flex-column min-vh-100" style="background:#ffffff;">
+<body class="d-flex flex-column min-vh-100" style="background:#ffffff; padding-top: 70px;">
 
 <!-- FLASH PORUKE -->
 <div class="container mt-2">

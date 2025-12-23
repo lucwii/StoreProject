@@ -7,9 +7,9 @@
     .welcome-title {
         font-size: 28px;
         font-weight: 700;
-        text-align: center;
+        text-align: left;
         color: #2b3b4a;
-        margin: 30px 0;
+        margin: 20px 0 30px 0;
     }
     .welcome-title .highlight {
         color: #f39c37;

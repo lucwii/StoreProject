@@ -20,11 +20,25 @@ class ProdajaStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'datum' => ['sometimes', 'date'],
-            'ukupan_iznos' => ['required', 'numeric', 'between:-99999999.99,99999999.99'],
-            'nacin_placanja' => ['required', 'string'],
             'kupac_id' => ['required', 'integer', 'exists:kupacs,id'],
-            // user_id and kupac_user_id will be set server-side where applicable
+            'nacin_placanja' => ['required', 'string', 'max:255'],
+            'ukupan_iznos' => ['required', 'numeric', 'min:0', 'max:99999999.99'],
+            'artikli' => ['required', 'array', 'min:1'],
+            'artikli.*.artikal_id' => ['required', 'integer', 'exists:artikals,id'],
+            'artikli.*.kolicina' => ['required', 'integer', 'min:1'],
+            'artikli.*.cena' => ['required', 'numeric', 'min:0'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'ukupan_iznos.numeric' => 'Ukupan iznos mora biti broj.',
+            'ukupan_iznos.min' => 'Ukupan iznos mora biti veći ili jednak 0.',
+            'artikli.*.kolicina.integer' => 'Količina mora biti ceo broj.',
+            'artikli.*.kolicina.min' => 'Količina mora biti veća od 0.',
+            'artikli.*.cena.numeric' => 'Cena mora biti broj.',
+            'artikli.*.cena.min' => 'Cena mora biti veća ili jednaka 0.',
         ];
     }
 }

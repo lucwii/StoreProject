@@ -21,10 +21,19 @@ class NarudzbinaUpdateRequest extends FormRequest
     {
         return [
             'datum' => ['required', 'date'],
-            'status' => ['required', 'string'],
+            'status' => ['required', 'string', 'max:255'],
             'dobavljac_id' => ['required', 'integer', 'exists:dobavljacs,id'],
-            'user_id' => ['required', 'integer', 'exists:users,id'],
-            'dobavljac_user_id' => ['required', 'integer', 'exists:dobavljac_users,id'],
+            'artikli' => ['required', 'array', 'min:1'],
+            'artikli.*.artikal_id' => ['required', 'integer', 'exists:artikals,id'],
+            'artikli.*.kolicina' => ['required', 'integer', 'min:1'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'artikli.*.kolicina.integer' => 'Količina mora biti ceo broj.',
+            'artikli.*.kolicina.min' => 'Količina mora biti veća od 0.',
         ];
     }
 }

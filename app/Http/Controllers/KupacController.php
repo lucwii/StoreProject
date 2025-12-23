@@ -13,10 +13,25 @@ class KupacController extends Controller
 {
     public function index(Request $request): View
     {
-        $kupacs = Kupac::all();
+        $query = Kupac::query();
+
+        // Pretraga po imenu, prezimenu, emailu ili adresi
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('ime', 'like', '%' . $search . '%')
+                  ->orWhere('prezime', 'like', '%' . $search . '%')
+                  ->orWhere('email', 'like', '%' . $search . '%')
+                  ->orWhere('adresa', 'like', '%' . $search . '%')
+                  ->orWhere('telefon', 'like', '%' . $search . '%');
+            });
+        }
+
+        $kupacs = $query->orderBy('prezime')->orderBy('ime')->get();
 
         return view('kupac.index', [
             'kupacs' => $kupacs,
+            'search' => $request->search ?? '',
         ]);
     }
 

@@ -3,10 +3,11 @@
 use App\Http\Controllers\ProdajaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IzvestajController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -26,8 +27,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('narudzbinas', App\Http\Controllers\NarudzbinaController::class);
 
     Route::get('/prodaja', [ProdajaController::class, 'create'])->name('prodajas.create')->middleware('auth');
-Route::post('/prodaja', [ProdajaController::class, 'store'])->name('prodajas.store')->middleware('auth');
+    Route::post('/prodaja', [ProdajaController::class, 'store'])->name('prodajas.store')->middleware('auth');
 
+    // Izveštaji - samo za admina
+    Route::get('/izvestaji', [IzvestajController::class, 'index'])->name('izvestaji.index')->middleware('auth');
 });
 
 require __DIR__.'/auth.php';

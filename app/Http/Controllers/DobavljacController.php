@@ -13,10 +13,24 @@ class DobavljacController extends Controller
 {
     public function index(Request $request): View
     {
-        $dobavljacs = Dobavljac::all();
+        $query = Dobavljac::query();
+
+        // Pretraga po nazivu, kontakt osobi, emailu ili telefonu
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('naziv', 'like', '%' . $search . '%')
+                  ->orWhere('kontakt_osoba', 'like', '%' . $search . '%')
+                  ->orWhere('email', 'like', '%' . $search . '%')
+                  ->orWhere('telefon', 'like', '%' . $search . '%');
+            });
+        }
+
+        $dobavljacs = $query->orderBy('naziv')->get();
 
         return view('dobavljac.index', [
             'dobavljacs' => $dobavljacs,
+            'search' => $request->search ?? '',
         ]);
     }
 

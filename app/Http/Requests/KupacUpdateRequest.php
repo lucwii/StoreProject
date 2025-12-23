@@ -20,11 +20,18 @@ class KupacUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ime' => ['required', 'string'],
-            'prezime' => ['required', 'string'],
-            'telefon' => ['required', 'string'],
-            'email' => ['required', 'email', 'max:nullable'],
-            'adresa' => ['required', 'string', 'max:nullable'],
+            'ime' => ['required', 'string', 'max:255'],
+            'prezime' => ['required', 'string', 'max:255'],
+            'telefon' => ['required', 'string', 'max:255', 'regex:/^[0-9+\-\s()]+$/'],
+            'email' => ['nullable', 'email', 'max:255'],
+            'adresa' => ['nullable', 'string', 'max:500'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'telefon.regex' => 'Telefon mora sadržati samo brojeve, +, -, razmake i zagrade.',
         ];
     }
 }

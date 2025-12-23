@@ -26,38 +26,28 @@ class ProdajaController extends Controller
         return view('prodaja.create');
     }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'kupac_id' => 'required',
-        'nacin_placanja' => 'required|string',
-        'ukupan_iznos' => 'required|numeric',
-        'artikli' => 'required|array|min:1',
-        'artikli.*.artikal_id' => 'required',
-        'artikli.*.kolicina' => 'required|numeric|min:1',
-        'artikli.*.cena' => 'required|numeric|min:0',
-    ]);
-
-    // kreiramo prodaju sa današnjim datumom
-    $prodaja = Prodaja::create([
-        'datum' => now(), // današnji datum
-        'ukupan_iznos' => $request->ukupan_iznos,
-        'nacin_placanja' => $request->nacin_placanja,
-        'kupac_id' => $request->kupac_id,
-        'user_id' => $request->user_id,
-    ]);
-
-    // dodajemo stavke prodaje
-    foreach ($request->artikli as $artikal) {
-        $prodaja->stavkaProdajes()->create([
-            'artikal_id' => $artikal['artikal_id'],
-            'kolicina' => $artikal['kolicina'],
-            'cena' => $artikal['cena'],
+    public function store(ProdajaStoreRequest $request): RedirectResponse
+    {
+        // kreiramo prodaju sa današnjim datumom
+        $prodaja = Prodaja::create([
+            'datum' => now(), // današnji datum
+            'ukupan_iznos' => $request->ukupan_iznos,
+            'nacin_placanja' => $request->nacin_placanja,
+            'kupac_id' => $request->kupac_id,
+            'user_id' => $request->user_id,
         ]);
-    }
 
-    return redirect()->route('dashboard')->with('success', 'Prodaja je sačuvana.');
-}
+        // dodajemo stavke prodaje
+        foreach ($request->artikli as $artikal) {
+            $prodaja->stavkaProdajes()->create([
+                'artikal_id' => $artikal['artikal_id'],
+                'kolicina' => $artikal['kolicina'],
+                'cena' => $artikal['cena'],
+            ]);
+        }
+
+        return redirect()->route('dashboard')->with('success', 'Prodaja je sačuvana.');
+    }
 
 
 

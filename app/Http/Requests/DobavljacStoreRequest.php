@@ -20,10 +20,17 @@ class DobavljacStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'naziv' => ['required', 'string'],
-            'kontakt_osoba' => ['required', 'string'],
-            'telefon' => ['required', 'string'],
-            'email' => ['required', 'email'],
+            'naziv' => ['required', 'string', 'max:255'],
+            'kontakt_osoba' => ['required', 'string', 'max:255'],
+            'telefon' => ['required', 'string', 'max:255', 'regex:/^[0-9+\-\s()]+$/'],
+            'email' => ['required', 'email', 'max:255'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'telefon.regex' => 'Telefon mora sadržati samo brojeve, +, -, razmake i zagrade.',
         ];
     }
 }
