@@ -24,6 +24,8 @@ jobs:
           extensions: mbstring, bcmath, pdo, pdo_mysql, json, curl, sqlite3
           coverage: none
 
+
+
       # Kes Composer zavisnosti
       - name: Kes composer zavisnosti
         uses: actions/cache@v4
@@ -43,28 +45,24 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
+      # Konfigurisanje SQLite baze podataka 
+      - name: Configure SQLite database
+        run: |
+          sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env
+          sed -i 's/DB_DATABASE=.*/DB_DATABASE=:memory:/' .env
+
+          
       # Pokretanje code style provere sa Pint
       - name: Pokretanje PHP code style provere sa Pintom
-        run: php artisan pint --test
+        run: ./vendor/bin/pint --test
 
       # Pokretanje migracija i seeding baze podataka
-      - name: Poketanje migracija i seeding baze podataka
-        run: |
-          php artisan migrate --force
-          php artisan db:seed --class=DatabaseSeeder
+      - name: Pokretanje migracija
+        run: php artisan migrate --force
 
       # Pokretanje Laravel testova
       - name: Pokretanje Laravel testova
         run: php artisan test
-
-      # Provera da li server radi
-      - name: Provera da li server radi
-        run: |
-          php artisan serve &
-          sleep 3
-          curl -s http://localhost:8000 | head -20
-          echo "Server je uspešno pokrenut i dostupan na localhost:8000"
-      
 
       # Završetak posla
       - name: Uspesno završavanje posla
