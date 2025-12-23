@@ -15,7 +15,9 @@ class ProdajaUseCaseTest extends TestCase
     use RefreshDatabase;
 
     protected User $prodavac;
+
     protected Kupac $kupac;
+
     protected Artikal $artikal;
 
     protected function setUp(): void
