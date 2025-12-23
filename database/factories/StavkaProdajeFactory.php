@@ -19,7 +19,6 @@ class StavkaProdajeFactory extends Factory
             'artikal_id' => Artikal::factory(),
             'kolicina' => fake()->numberBetween(-10000, 10000),
             'cena' => fake()->randomFloat(2, 0, 999999.99),
-            'prodaja_artikal_id' => ProdajaArtikal::factory(),
         ];
     }
 }

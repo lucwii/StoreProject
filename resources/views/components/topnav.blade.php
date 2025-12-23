@@ -76,8 +76,8 @@
         @if($isAdmin)
             <a href="{{ route('izvestaji.index') }}" class="topnav-pill {{ $isIzvestaji ? 'active' : '' }}">Izveštaji</a>
         @endif
-        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="topnav-pill">Logout</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="topnav-pill">Logout</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
         </div>
     </div>
 </div>

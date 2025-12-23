@@ -19,7 +19,6 @@ class NarudzbinaFactory extends Factory
             'status' => fake()->word(),
             'dobavljac_id' => Dobavljac::factory(),
             'user_id' => User::factory(),
-            'dobavljac_user_id' => DobavljacUser::factory(),
         ];
     }
 }

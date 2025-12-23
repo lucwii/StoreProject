@@ -18,7 +18,6 @@ class StavkaNarudzbineFactory extends Factory
             'narudzbina_id' => Narudzbina::factory(),
             'artikal_id' => Artikal::factory(),
             'kolicina' => fake()->numberBetween(-10000, 10000),
-            'narudzbina_artikal_id' => NarudzbinaArtikal::factory(),
         ];
     }
 }

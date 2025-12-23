@@ -20,7 +20,6 @@ class ProdajaFactory extends Factory
             'nacin_placanja' => fake()->word(),
             'kupac_id' => Kupac::factory(),
             'user_id' => User::factory(),
-            'kupac_user_id' => KupacUser::factory(),
         ];
     }
 }
