@@ -18,11 +18,11 @@ class DobavljacController extends Controller
         // Pretraga po nazivu, kontakt osobi, emailu ili telefonu
         if ($request->has('search') && $request->search) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('naziv', 'like', '%' . $search . '%')
-                  ->orWhere('kontakt_osoba', 'like', '%' . $search . '%')
-                  ->orWhere('email', 'like', '%' . $search . '%')
-                  ->orWhere('telefon', 'like', '%' . $search . '%');
+            $query->where(function ($q) use ($search) {
+                $q->where('naziv', 'like', '%'.$search.'%')
+                    ->orWhere('kontakt_osoba', 'like', '%'.$search.'%')
+                    ->orWhere('email', 'like', '%'.$search.'%')
+                    ->orWhere('telefon', 'like', '%'.$search.'%');
             });
         }
 

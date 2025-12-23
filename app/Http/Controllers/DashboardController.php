@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Prodaja;
-use App\Models\Kupac;
 use App\Models\Artikal;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Kupac;
+use App\Models\Prodaja;
 
 class DashboardController extends Controller
 {
@@ -18,8 +16,8 @@ class DashboardController extends Controller
             ->get()
             ->map(function ($prodaja) {
                 return [
-                    'kupac' => $prodaja->kupac ? $prodaja->kupac->ime . ' ' . $prodaja->kupac->prezime : 'N/A',
-                    'iznos' => number_format($prodaja->ukupan_iznos, 2, ',', '.') . ' RSD',
+                    'kupac' => $prodaja->kupac ? $prodaja->kupac->ime.' '.$prodaja->kupac->prezime : 'N/A',
+                    'iznos' => number_format($prodaja->ukupan_iznos, 2, ',', '.').' RSD',
                 ];
             });
 
@@ -28,9 +26,10 @@ class DashboardController extends Controller
             ->get()
             ->map(function ($kupac) {
                 $ukupnoPotroseno = $kupac->prodajas->sum('ukupan_iznos');
+
                 return [
                     'id' => $kupac->id,
-                    'ime' => $kupac->ime . ' ' . $kupac->prezime,
+                    'ime' => $kupac->ime.' '.$kupac->prezime,
                     'ukupno_potroseno' => $ukupnoPotroseno,
                 ];
             })
@@ -40,7 +39,7 @@ class DashboardController extends Controller
             ->map(function ($kupac) {
                 return [
                     'kupac' => $kupac['ime'],
-                    'ukupno_potroseno' => number_format($kupac['ukupno_potroseno'], 2, ',', '.') . ' RSD',
+                    'ukupno_potroseno' => number_format($kupac['ukupno_potroseno'], 2, ',', '.').' RSD',
                 ];
             });
 
@@ -62,4 +61,3 @@ class DashboardController extends Controller
         ]);
     }
 }
-

@@ -2,21 +2,22 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\Test;
-use App\Models\User;
-use App\Models\Uloga;
-use App\Models\Kupac;
-use App\Models\Dobavljac;
 use App\Models\Artikal;
+use App\Models\Dobavljac;
+use App\Models\Kupac;
+use App\Models\Uloga;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ProdajaTest extends TestCase
 {
     use RefreshDatabase;
 
     protected User $prodavac;
+
     protected Kupac $kupac;
+
     protected Artikal $artikal;
 
     protected function setUp(): void
@@ -77,7 +78,7 @@ class ProdajaTest extends TestCase
                         'artikal_id' => $this->artikal->id,
                         'kolicina' => 2,
                         'cena' => 1200,
-                    ]
+                    ],
                 ],
             ]);
 
@@ -101,7 +102,7 @@ class ProdajaTest extends TestCase
                     'artikal_id' => $this->artikal->id,
                     'kolicina' => 1,
                     'cena' => 1000,
-                ]
+                ],
             ],
         ]);
 

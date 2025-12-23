@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Narudzbina;
+use Illuminate\Database\Seeder;
 
 class NarudzbinaSeeder extends Seeder
 {
@@ -13,7 +13,7 @@ class NarudzbinaSeeder extends Seeder
             'datum' => '2025-03-05',
             'status' => 'Poslata',
             'dobavljac_id' => 2,
-            'user_id' => 1
+            'user_id' => 1,
         ]);
     }
 }

@@ -18,15 +18,15 @@ class NarudzbinaController extends Controller
         // Pretraga po statusu, dobavljaču ili artiklu
         if ($request->has('search') && $request->search) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('status', 'like', '%' . $search . '%')
-                  ->orWhereHas('dobavljac', function($q) use ($search) {
-                      $q->where('naziv', 'like', '%' . $search . '%');
-                  })
-                  ->orWhereHas('stavkaNarudzbines.artikal', function($q) use ($search) {
-                      $q->where('naziv', 'like', '%' . $search . '%')
-                        ->orWhere('opis', 'like', '%' . $search . '%');
-                  });
+            $query->where(function ($q) use ($search) {
+                $q->where('status', 'like', '%'.$search.'%')
+                    ->orWhereHas('dobavljac', function ($q) use ($search) {
+                        $q->where('naziv', 'like', '%'.$search.'%');
+                    })
+                    ->orWhereHas('stavkaNarudzbines.artikal', function ($q) use ($search) {
+                        $q->where('naziv', 'like', '%'.$search.'%')
+                            ->orWhere('opis', 'like', '%'.$search.'%');
+                    });
             });
         }
 
@@ -89,6 +89,7 @@ class NarudzbinaController extends Controller
     public function edit(Request $request, Narudzbina $narudzbina): View
     {
         $narudzbina->load(['stavkaNarudzbines.artikal', 'dobavljac']);
+
         return view('narudzbina.edit', [
             'narudzbina' => $narudzbina,
         ]);

@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Artikal;
 use App\Models\Prodaja;
-use App\Models\ProdajaArtikal;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StavkaProdajeFactory extends Factory

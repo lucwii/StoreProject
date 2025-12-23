@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\StavkaNarudzbine;
+use Illuminate\Database\Seeder;
 
 class StavkaNarudzbineSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class StavkaNarudzbineSeeder extends Seeder
         StavkaNarudzbine::create([
             'narudzbina_id' => 1,
             'artikal_id' => 2,
-            'kolicina' => 20
+            'kolicina' => 20,
         ]);
     }
 }

@@ -131,4 +131,3 @@ class IzvestajiUseCaseTest extends TestCase
         $response->assertSee('2.000,00 RSD');
     }
 }
-

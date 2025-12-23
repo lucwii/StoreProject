@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Kupac;
+use Illuminate\Database\Seeder;
 
 class KupacSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class KupacSeeder extends Seeder
             'prezime' => 'Petrović',
             'telefon' => '0641234567',
             'email' => 'nikola@petrovic-farbanje.rs',
-            'adresa' => 'Voždovac, Beograd'
+            'adresa' => 'Voždovac, Beograd',
         ]);
 
         Kupac::create([
@@ -22,7 +22,7 @@ class KupacSeeder extends Seeder
             'prezime' => 'Kovačević',
             'telefon' => '0639876543',
             'email' => 'jelena@design.rs',
-            'adresa' => 'Novi Beograd'
+            'adresa' => 'Novi Beograd',
         ]);
 
         Kupac::create([
@@ -30,7 +30,7 @@ class KupacSeeder extends Seeder
             'prezime' => 'Ilić',
             'telefon' => '065332211',
             'email' => 'petar@ilic.rs',
-            'adresa' => 'Zemun'
+            'adresa' => 'Zemun',
         ]);
 
         Kupac::create([
@@ -38,7 +38,7 @@ class KupacSeeder extends Seeder
             'prezime' => 'Marković',
             'telefon' => '062998877',
             'email' => 'ana@markovic.rs',
-            'adresa' => 'Mirijevo'
+            'adresa' => 'Mirijevo',
         ]);
     }
 }

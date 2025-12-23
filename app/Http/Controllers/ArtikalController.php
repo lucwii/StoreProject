@@ -18,9 +18,9 @@ class ArtikalController extends Controller
         // Pretraga po nazivu ili opisu
         if ($request->has('search') && $request->search) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('naziv', 'like', '%' . $search . '%')
-                  ->orWhere('opis', 'like', '%' . $search . '%');
+            $query->where(function ($q) use ($search) {
+                $q->where('naziv', 'like', '%'.$search.'%')
+                    ->orWhere('opis', 'like', '%'.$search.'%');
             });
         }
 

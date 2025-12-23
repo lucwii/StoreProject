@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Kupac;
 use App\Models\Uloga;
 use App\Models\User;
-use App\Models\Kupac;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -93,4 +93,3 @@ class KupciUseCaseTest extends TestCase
         ]);
     }
 }
-

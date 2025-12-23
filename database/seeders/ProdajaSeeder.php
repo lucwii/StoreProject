@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Prodaja;
+use Illuminate\Database\Seeder;
 
 class ProdajaSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class ProdajaSeeder extends Seeder
             'ukupan_iznos' => 6150,
             'nacin_placanja' => 'Gotovina',
             'kupac_id' => 1,
-            'user_id' => 2
+            'user_id' => 2,
         ]);
 
         Prodaja::create([
@@ -22,7 +22,7 @@ class ProdajaSeeder extends Seeder
             'ukupan_iznos' => 5400,
             'nacin_placanja' => 'Kartica',
             'kupac_id' => 2,
-            'user_id' => 2
+            'user_id' => 2,
         ]);
     }
 }

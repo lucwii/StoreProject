@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ime');
             $table->string('prezime');
             $table->string('telefon');
-            $table->string('email' );
+            $table->string('email');
             $table->string('adresa');
             $table->timestamps();
         });

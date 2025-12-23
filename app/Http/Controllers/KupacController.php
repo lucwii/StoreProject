@@ -18,12 +18,12 @@ class KupacController extends Controller
         // Pretraga po imenu, prezimenu, emailu ili adresi
         if ($request->has('search') && $request->search) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('ime', 'like', '%' . $search . '%')
-                  ->orWhere('prezime', 'like', '%' . $search . '%')
-                  ->orWhere('email', 'like', '%' . $search . '%')
-                  ->orWhere('adresa', 'like', '%' . $search . '%')
-                  ->orWhere('telefon', 'like', '%' . $search . '%');
+            $query->where(function ($q) use ($search) {
+                $q->where('ime', 'like', '%'.$search.'%')
+                    ->orWhere('prezime', 'like', '%'.$search.'%')
+                    ->orWhere('email', 'like', '%'.$search.'%')
+                    ->orWhere('adresa', 'like', '%'.$search.'%')
+                    ->orWhere('telefon', 'like', '%'.$search.'%');
             });
         }
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProdajaStoreRequest;
 use App\Http\Requests\ProdajaUpdateRequest;
 use App\Models\Prodaja;
-use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -48,8 +47,6 @@ class ProdajaController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Prodaja je sačuvana.');
     }
-
-
 
     public function show(Request $request, Prodaja $prodaja): View
     {

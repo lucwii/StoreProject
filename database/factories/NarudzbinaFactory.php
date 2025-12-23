@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Dobavljac;
-use App\Models\DobavljacUser;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

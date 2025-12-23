@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Prodaja;
-use App\Models\Narudzbina;
-use App\Models\Kupac;
 use App\Models\Artikal;
+use App\Models\Kupac;
+use App\Models\Narudzbina;
+use App\Models\Prodaja;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Carbon\Carbon;
 
 class IzvestajController extends Controller
 {
     public function index(Request $request): View
     {
         // Provera da li je korisnik admin
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             abort(403, 'Nemate pristup ovoj stranici.');
         }
-        
+
         $user = auth()->user()->load('uloga');
-        if (!$user->isAdmin()) {
+        if (! $user->isAdmin()) {
             abort(403, 'Nemate pristup ovoj stranici.');
         }
         // Podrazumevani period - poslednji mesec
@@ -36,11 +36,11 @@ class IzvestajController extends Controller
             ->count();
 
         // Najverniji kupac (kupac sa najviše prodaja u periodu)
-        $najvernijiKupac = Kupac::withCount(['prodajas' => function($query) use ($odDatum, $doDatum) {
+        $najvernijiKupac = Kupac::withCount(['prodajas' => function ($query) use ($odDatum, $doDatum) {
             $query->whereBetween('datum', [$odDatum, $doDatum]);
         }])
-        ->orderBy('prodajas_count', 'desc')
-        ->first();
+            ->orderBy('prodajas_count', 'desc')
+            ->first();
 
         // Artikli sa niskom zalihom (količina < 10)
         $artikliNiskaZaliha = Artikal::where('kolicina_na_stanju', '<', 10)->count();
@@ -51,7 +51,7 @@ class IzvestajController extends Controller
         $narudzbine = Narudzbina::whereBetween('datum', [$odDatum, $doDatum])
             ->with('stavkaNarudzbines.artikal')
             ->get();
-        
+
         foreach ($narudzbine as $narudzbina) {
             foreach ($narudzbina->stavkaNarudzbines as $stavka) {
                 $ukupnaNabavka += $stavka->artikal->nabavna_cena * $stavka->kolicina;
@@ -69,4 +69,3 @@ class IzvestajController extends Controller
         ]);
     }
 }
-

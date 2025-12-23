@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Kupac;
-use App\Models\KupacUser;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

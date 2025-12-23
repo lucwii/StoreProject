@@ -16,7 +16,9 @@ class NarudzbinaUseCaseTest extends TestCase
     use RefreshDatabase;
 
     protected User $menadzer;
+
     protected Dobavljac $dobavljac;
+
     protected Artikal $artikal;
 
     protected function setUp(): void
@@ -91,4 +93,3 @@ class NarudzbinaUseCaseTest extends TestCase
         ]);
     }
 }
-

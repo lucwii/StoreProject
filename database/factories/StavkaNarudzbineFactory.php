@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Artikal;
 use App\Models\Narudzbina;
-use App\Models\NarudzbinaArtikal;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StavkaNarudzbineFactory extends Factory
