@@ -10,14 +10,12 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ProdajaTest extends TestCase
+class ProdajaUseCaseTest extends TestCase
 {
     use RefreshDatabase;
 
     protected User $prodavac;
-
     protected Kupac $kupac;
-
     protected Artikal $artikal;
 
     protected function setUp(): void
@@ -56,6 +54,7 @@ class ProdajaTest extends TestCase
         ]);
     }
 
+    /** @test */
     public function prodavac_moze_da_otvori_stranicu_za_kreiranje_prodaje(): void
     {
         $response = $this->actingAs($this->prodavac)
@@ -65,6 +64,7 @@ class ProdajaTest extends TestCase
         $response->assertSee('Prodaja');
     }
 
+    /** @test */
     public function prodavac_moze_da_kreira_prodaju(): void
     {
         $response = $this->actingAs($this->prodavac)
@@ -91,6 +91,7 @@ class ProdajaTest extends TestCase
         ]);
     }
 
+    /** @test */
     public function prodaja_ne_moze_bez_kupca(): void
     {
         $response = $this->actingAs($this->prodavac)->post(route('prodajas.store'), [

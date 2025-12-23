@@ -1,0 +1,71 @@
+name: Laravel CI/CD
+
+on:
+  push:
+    branches: 
+      - '*'
+  pull_request:
+    branches: 
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repozitorijuma
+      - name: Proveru koda
+        uses: actions/checkout@v4
+
+      # Podesavanje PHP
+      - name: Podesavanje PHP okruženja
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, bcmath, pdo, pdo_mysql, json, curl, sqlite3
+          coverage: none
+
+      # Kes Composer zavisnosti
+      - name: Kes composer zavisnosti
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      # Instalacija Composer paketa
+      - name: Instalacija Composer paketa
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      # Kopiranje .env fajla i generisanje aplikacionog ključa
+      - name: Setup environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      # Pokretanje code style provere sa Pint
+      - name: Pokretanje PHP code style provere sa Pintom
+        run: php artisan pint --test
+
+      # Pokretanje migracija i seeding baze podataka
+      - name: Poketanje migracija i seeding baze podataka
+        run: |
+          php artisan migrate --force
+          php artisan db:seed --class=DatabaseSeeder
+
+      # Pokretanje Laravel testova
+      - name: Pokretanje Laravel testova
+        run: php artisan test
+
+      # Provera da li server radi
+      - name: Provera da li server radi
+        run: |
+          php artisan serve &
+          sleep 3
+          curl -s http://localhost:8000 | head -20
+          echo "Server je uspešno pokrenut i dostupan na localhost:8000"
+      
+
+      # Završetak posla
+      - name: Uspesno završavanje posla
+        run: echo "✅ Laravel CI posao je uspešno završen!"
