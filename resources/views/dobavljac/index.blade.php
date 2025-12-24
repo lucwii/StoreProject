@@ -97,7 +97,7 @@
 </style>
 @endpush
 
-@section('content')
+    @section('content')
     <x-topnav />
 
     <div class="container">
@@ -165,4 +165,4 @@
             </div>
         </div>
     </div>
-@endsection
+    @endsection

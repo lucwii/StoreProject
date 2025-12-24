@@ -30,16 +30,18 @@ Aplikacija je razvijena koristeći sledeće tehnologije i alate:
 
 ### Frontend Tehnologije
 
-- **Tailwind CSS** - Utility-first CSS framework za stilizovanje
 - **Alpine.js** - Lagana JavaScript biblioteka za interaktivne komponente
 - **Vite** - Build tool za frontend assets
 - **Bootstrap 5** - CSS framework (korišćen za neke komponente)
+
+## Figma
+
+Sve ekrane sam pravio u Figma: https://www.figma.com/design/C16wkd02qEkj65p8DsqqEi/Untitled?node-id=0-1&p=f&t=xaBzyUGgQGNdKEey-0
 
 ### Biblioteke
 
 - **Carbon** - PHP biblioteka za rad sa datumima
 - **Faker** - Generisanje test podataka
-- **Axios** - HTTP klijent za AJAX zahteve
 
 ### Baza Podataka
 
@@ -566,11 +568,6 @@ foreach ($validated['artikli'] as $artikalData) {
 - **Svrha:** Automatska provera PSR-12 standarda
 
 ### Frontend Biblioteke
-
-#### Tailwind CSS (v3.1.0)
-- **Korišćeno za:** Stilizovanje komponenti
-- **Lokacija:** `resources/css/app.css`, svi Blade view fajlovi
-- **Svrha:** Utility-first CSS za brzo stilizovanje
 
 #### Bootstrap 5
 - **Korišćeno za:** Grid sistem i neke komponente (tabele, dugmad)

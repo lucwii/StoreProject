@@ -80,7 +80,7 @@
 </style>
 @endpush
 
-@section('content')
+    @section('content')
     <div class="container">
         <div class="form-container">
             <h1 class="page-title">Dodaj kupca</h1>
@@ -182,4 +182,4 @@
             </form>
         </div>
     </div>
-@endsection
+    @endsection
